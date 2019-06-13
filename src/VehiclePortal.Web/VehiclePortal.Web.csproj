@@ -10,6 +10,15 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\VehiclePortal.Common\VehiclePortal.Common.csproj" />
+    <ProjectReference Include="..\VehiclePortal.Data\VehiclePortal.Data.csproj" />
+    <ProjectReference Include="..\VehiclePortal.Models\VehiclePortal.Models.csproj" />
+    <ProjectReference Include="..\VehiclePortal.Services\VehiclePortal.Services.csproj" />
   </ItemGroup>
 
 </Project>

@@ -40,7 +40,7 @@ namespace VehiclePortal.Web
                      options.UseSqlServer(
                          Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddDefaultIdentity<VehiclePortalUser>(options =>
+            services.AddIdentity<VehiclePortalUser, IdentityRole>(options =>
             {
                 options.Password.RequireDigit = false;
                 options.Password.RequiredLength = 3;
@@ -49,6 +49,8 @@ namespace VehiclePortal.Web
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireUppercase = false;
             })
+                .AddRoleManager<RoleManager<IdentityRole>>()
+                .AddDefaultTokenProviders()
                 .AddDefaultUI(UIFramework.Bootstrap4)
                 .AddEntityFrameworkStores<VehiclePortalDbContext>();
 
@@ -58,6 +60,39 @@ namespace VehiclePortal.Web
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            using (var serviceScope = app.ApplicationServices.CreateScope())
+            {
+                var dbContext = serviceScope.ServiceProvider.GetRequiredService<VehiclePortalDbContext>();
+
+                var roleManager = serviceScope.ServiceProvider.GetService<RoleManager<IdentityRole>>();
+
+                var userManager = serviceScope.ServiceProvider.GetRequiredService<UserManager<VehiclePortalUser>>();
+
+                if (!roleManager.RoleExistsAsync("Admin").Result)
+                {
+                    roleManager.CreateAsync(new IdentityRole("Admin")).Wait();
+                }
+
+                if (userManager.FindByNameAsync("admin").Result == null)
+                {
+                    var adminUser = new VehiclePortalUser();
+                    adminUser.VehiclePortalUsername = "admin";
+                    adminUser.UserName = "admin";
+                    adminUser.Email = "admin@admin.com";
+                    adminUser.Address = "admindiana";
+                    adminUser.Name = "admin";
+
+                    string adminPassword = "123456";
+
+                    IdentityResult result = userManager.CreateAsync(adminUser, adminPassword).Result;
+
+                    if (result.Succeeded)
+                    {
+                        userManager.AddToRoleAsync(adminUser,"Admin").Wait();
+                    }
+                }
+            }
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

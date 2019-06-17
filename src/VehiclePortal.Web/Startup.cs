@@ -14,6 +14,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using VehiclePortal.Models;
 using VehiclePortal.Data;
+using AutoMapper;
+using VehiclePortal.Common.Mapper;
 
 namespace VehiclePortal.Web
 {
@@ -53,6 +55,8 @@ namespace VehiclePortal.Web
                 .AddDefaultTokenProviders()
                 .AddDefaultUI(UIFramework.Bootstrap4)
                 .AddEntityFrameworkStores<VehiclePortalDbContext>();
+
+            Mapper.Initialize(cfg => cfg.AddProfile<MapperConfig>());
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }

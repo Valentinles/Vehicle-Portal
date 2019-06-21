@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using VehiclePortal.Models.Enums;
 
-namespace VehiclePortal.Models
+namespace VehiclePortal.Common.ViewModels
 {
-    public class Car
+    public class CarBindingModel
     {
         public int Id { get; set; }
 
@@ -30,7 +30,5 @@ namespace VehiclePortal.Models
         public string LargeImageUrl { get; set; }
 
         public decimal Price { get; set; }
-
-        public int Rating { get; set; }
     }
 }

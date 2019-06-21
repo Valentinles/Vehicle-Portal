@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace VehiclePortal.Data.Migrations
 {
-    public partial class CarsMigrationAdded : Migration
+    public partial class CarsMigrationsAdded : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -42,7 +42,7 @@ namespace VehiclePortal.Data.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Brand = table.Column<string>(nullable: true),
-                    Model = table.Column<string>(nullable: true),
+                    CarModel = table.Column<string>(nullable: true),
                     Year = table.Column<int>(nullable: false),
                     Features = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),

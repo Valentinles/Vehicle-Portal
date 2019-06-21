@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using VehiclePortal.Models.Enums;
 
-namespace VehiclePortal.Models
+namespace VehiclePortal.Common.ViewModels
 {
-    public class Car
+    public class EditCarViewModel
     {
         public int Id { get; set; }
 

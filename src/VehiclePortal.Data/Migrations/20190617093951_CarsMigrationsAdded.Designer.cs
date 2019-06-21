@@ -10,8 +10,8 @@ using VehiclePortal.Data;
 namespace VehiclePortal.Data.Migrations
 {
     [DbContext(typeof(VehiclePortalDbContext))]
-    [Migration("20190617071606_CarsMigrationAdded")]
-    partial class CarsMigrationAdded
+    [Migration("20190617093951_CarsMigrationsAdded")]
+    partial class CarsMigrationsAdded
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -139,6 +139,8 @@ namespace VehiclePortal.Data.Migrations
 
                     b.Property<string>("Brand");
 
+                    b.Property<string>("CarModel");
+
                     b.Property<int>("Category");
 
                     b.Property<string>("Description");
@@ -148,8 +150,6 @@ namespace VehiclePortal.Data.Migrations
                     b.Property<int>("Fuel");
 
                     b.Property<string>("LargeImageUrl");
-
-                    b.Property<string>("Model");
 
                     b.Property<decimal>("Price");
 

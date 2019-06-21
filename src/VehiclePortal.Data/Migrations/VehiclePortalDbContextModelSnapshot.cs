@@ -137,6 +137,8 @@ namespace VehiclePortal.Data.Migrations
 
                     b.Property<string>("Brand");
 
+                    b.Property<string>("CarModel");
+
                     b.Property<int>("Category");
 
                     b.Property<string>("Description");
@@ -146,8 +148,6 @@ namespace VehiclePortal.Data.Migrations
                     b.Property<int>("Fuel");
 
                     b.Property<string>("LargeImageUrl");
-
-                    b.Property<string>("Model");
 
                     b.Property<decimal>("Price");
 

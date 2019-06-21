@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using System.Text;
 using VehiclePortal.Models.Enums;
 
-namespace VehiclePortal.Models
+namespace VehiclePortal.Common.ViewModels
 {
-    public class Car
+    public class AllCarsListedViewModel
     {
-        public int Id { get; set; }
-
         public string Brand { get; set; }
 
         public string CarModel { get; set; }

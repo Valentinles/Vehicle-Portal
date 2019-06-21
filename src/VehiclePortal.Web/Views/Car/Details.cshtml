@@ -1,0 +1,19 @@
+﻿@model VehiclePortal.Common.ViewModels.CarDetailsViewModel
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<p>@Model.Brand</p>
+<p>@Model.Rating</p>
+@if (Model.Rating <= 5)
+{
+    <p>Awful</p>
+}
+<p>
+    @await Html.PartialAsync("_RatePartial", new VehiclePortal.Common.ViewModels.RateCarBindingModel
+                    {
+                        CarId = Model.Id
+                    })
+</p>

@@ -21,12 +21,4 @@
     <ProjectReference Include="..\VehiclePortal.Services\VehiclePortal.Services.csproj" />
   </ItemGroup>
 
-
-  <ItemGroup>
-    <Folder Include="Areas\Cars\Controllers\" />
-    <Folder Include="Areas\Cars\Data\" />
-    <Folder Include="Areas\Cars\Models\" />
-    <Folder Include="Areas\Cars\Views\" />
-  </ItemGroup>
-
 </Project>

@@ -1,0 +1,16 @@
+﻿@model IEnumerable<VehiclePortal.Common.ViewModels.AllCarsListedViewModel>
+@{
+    ViewData["Title"] = "All";
+}
+
+<h1>All</h1>
+
+@foreach (var car in Model)
+{
+    <div class="container-fluid">
+    <p>@car.Brand</p>
+    <p>@car.Fuel</p>
+    <p>@car.Rating</p>
+    <img src="@car.SmallImageUrl" class="" style="width: 200px;" />
+    </div>
+}

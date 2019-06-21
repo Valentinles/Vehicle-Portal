@@ -16,6 +16,8 @@ using VehiclePortal.Models;
 using VehiclePortal.Data;
 using AutoMapper;
 using VehiclePortal.Common.Mapper;
+using VehiclePortal.Services.Implementations;
+using VehiclePortal.Services.Interfaces;
 
 namespace VehiclePortal.Web
 {
@@ -57,6 +59,8 @@ namespace VehiclePortal.Web
                 .AddEntityFrameworkStores<VehiclePortalDbContext>();
 
             Mapper.Initialize(cfg => cfg.AddProfile<MapperConfig>());
+
+            services.AddScoped<ICarService, CarService>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
@@ -117,11 +121,6 @@ namespace VehiclePortal.Web
 
             app.UseMvc(routes =>
             {
-                routes.MapRoute(
-                    name: "areas",
-                    template: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
-            );
-
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");

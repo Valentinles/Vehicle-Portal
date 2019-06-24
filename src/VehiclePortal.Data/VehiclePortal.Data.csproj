@@ -5,7 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20190617071606_CarsMigrationAdded.cs" />
+    <Compile Remove="Migrations\20190622085306_AppMigrationsAdded.cs" />
+    <Compile Remove="Migrations\20190622094026_AppMigrationsAdded.cs" />
+    <Compile Remove="Migrations\20190622101215_AppMigrationAdded.cs" />
+    <Compile Remove="Migrations\20190622103201_AppMigrationsAdded.cs" />
+    <Compile Remove="Migrations\20190624072250_AppMigrationsAdded.cs" />
+    <Compile Remove="Migrations\20190624072958_AppMigrationsAdded.cs" />
+    <Compile Remove="Migrations\20190624074100_AppMigrationsAdded.cs" />
   </ItemGroup>
 
   <ItemGroup>

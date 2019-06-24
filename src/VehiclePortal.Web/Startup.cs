@@ -89,6 +89,7 @@ namespace VehiclePortal.Web
                     adminUser.Email = "admin@admin.com";
                     adminUser.Address = "admindiana";
                     adminUser.Name = "admin";
+                    adminUser.Balance = 9999999m;
 
                     string adminPassword = "123456";
 

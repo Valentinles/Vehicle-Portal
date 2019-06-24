@@ -31,6 +31,8 @@ namespace VehiclePortal.Common.ViewModels
 
         public decimal Price { get; set; }
 
+        public decimal RentPricePerDay { get; set; }
+
         public int Rating { get; set; }
     }
 }

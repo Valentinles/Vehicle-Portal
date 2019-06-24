@@ -21,7 +21,13 @@ namespace VehiclePortal.Services.Interfaces
 
         Task<IEnumerable<Car>> GetAll();
 
+        Task<IEnumerable<Car>> GetAllByRating();
+
         Task<bool> Rate(RateCarBindingModel model);
+
+        Task<bool> Buy(BuyCarBindingModel model, string username);
+
+        Task<bool> Rent(RentCarBindingModel model, string username);
 
     }
 }

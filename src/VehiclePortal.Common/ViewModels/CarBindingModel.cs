@@ -30,5 +30,7 @@ namespace VehiclePortal.Common.ViewModels
         public string LargeImageUrl { get; set; }
 
         public decimal Price { get; set; }
+
+        public decimal RentPricePerDay { get; set; }
     }
 }

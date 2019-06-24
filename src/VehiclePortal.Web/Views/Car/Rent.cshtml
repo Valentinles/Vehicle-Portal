@@ -1,0 +1,15 @@
+﻿@model VehiclePortal.Common.ViewModels.CarDetailsViewModel
+@{
+    ViewData["Title"] = "Rent";
+}
+
+<h1>Rent</h1>
+
+<p>@Model.Brand</p>
+<p>@Model.RentPricePerDay</p>
+<p>
+    @await Html.PartialAsync("_RentPartial", new VehiclePortal.Common.ViewModels.RentCarBindingModel
+                    {
+                        CarId = Model.Id
+                    })
+</p>

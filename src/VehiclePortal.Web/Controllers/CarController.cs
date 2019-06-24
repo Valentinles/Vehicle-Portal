@@ -34,7 +34,7 @@ namespace VehiclePortal.Web.Controllers
 
             await this.carService.Add(model);
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("All", "Car");
         }
 
         [HttpGet]
@@ -87,6 +87,14 @@ namespace VehiclePortal.Web.Controllers
             return this.View(cars);
         }
 
+        public async Task<IActionResult> TopRated()
+        {
+            var cars = (await this.carService.GetAllByRating())
+                .Select(Mapper.Map<AllCarsListedViewModel>);
+
+            return this.View(cars);
+        }
+
         public async Task<IActionResult> Details(int id)
         {
             var car = await this.carService.Details(id);
@@ -108,7 +116,59 @@ namespace VehiclePortal.Web.Controllers
 
             var rate = await this.carService.Rate(model);
 
-            return RedirectToAction("Details", "Car");
+            return RedirectToAction("All", "Car");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Buy(int id)
+        {
+            var car = await this.carService.Details(id);
+
+            if (car == null)
+            {
+                return this.NotFound();
+            }
+
+            return this.View(car);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Buy(BuyCarBindingModel model)
+        {
+            var result = await this.carService.Buy(model, this.User.Identity.Name);
+
+            if(!result)
+            {
+                return this.NotFound();
+            }
+
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Rent(int id)
+        {
+            var car = await this.carService.Details(id);
+
+            if (car == null)
+            {
+                return this.NotFound();
+            }
+
+            return this.View(car);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Rent(RentCarBindingModel model)
+        {
+            var result = await this.carService.Rent(model, this.User.Identity.Name);
+
+            if (!result)
+            {
+                return this.NotFound();
+            }
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }

@@ -24,7 +24,13 @@ namespace VehiclePortal.Common.Mapper
                 .ForMember(m => m.LargeImageUrl, opt => opt.Ignore())
                 .ForMember(m => m.Year, opt => opt.Ignore())
                 .ForMember(m => m.Category, opt => opt.Ignore())
-                .ForMember(m => m.Description, opt => opt.Ignore());
+                .ForMember(m => m.Description, opt => opt.Ignore())
+                .ForMember(m => m.Owners, opt => opt.Ignore())
+                .ForMember(m => m.Renters, opt => opt.Ignore())
+                .ForMember(m => m.RentPricePerDay, opt => opt.Ignore());
+            this.CreateMap<BuyCar, BuyCarBindingModel>();
+            this.CreateMap<RentCar, RentCarBindingModel>();
+
 
 
 

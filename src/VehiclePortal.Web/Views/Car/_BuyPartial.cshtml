@@ -1,0 +1,11 @@
+﻿@model VehiclePortal.Common.ViewModels.BuyCarBindingModel
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+<form asp-controller="Car" asp-action="Buy" method="post">
+    <div class="d-flex align-items-center">
+        <button type="submit" class="btn btn-outline-success">Confirm the purchase</button>
+    </div>
+    <input type="hidden" asp-for="CarId" value="@Model.CarId">
+</form>

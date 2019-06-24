@@ -1,0 +1,15 @@
+﻿@model VehiclePortal.Common.ViewModels.CarDetailsViewModel
+@{
+    ViewData["Title"] = "Buy";
+}
+
+<h1>Buy</h1>
+
+<p>@Model.Brand</p>
+<p>@Model.Price</p>
+<p>
+    @await Html.PartialAsync("_BuyPartial", new VehiclePortal.Common.ViewModels.BuyCarBindingModel
+                    {
+                        CarId = Model.Id
+                    })
+</p>

@@ -7,6 +7,12 @@ namespace VehiclePortal.Models
 {
     public class Car
     {
+        public Car()
+        {
+            this.Owners = new List<BuyCar>();
+            this.Renters = new List<RentCar>();
+        }
+
         public int Id { get; set; }
 
         public string Brand { get; set; }
@@ -29,8 +35,14 @@ namespace VehiclePortal.Models
 
         public string LargeImageUrl { get; set; }
 
+        public decimal RentPricePerDay { get; set; }
+
         public decimal Price { get; set; }
 
         public int Rating { get; set; }
+
+        public ICollection<BuyCar> Owners { get; set; }
+
+        public ICollection <RentCar> Renters { get; set; }
     }
 }

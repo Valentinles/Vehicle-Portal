@@ -112,5 +112,71 @@ namespace VehiclePortal.Services.Implementations
 
             return true;
         }
+
+        public async Task<bool> Buy(BuyCarBindingModel model, string username)
+        {
+            var user = await this.context.Users.SingleOrDefaultAsync(u => u.UserName == username);
+
+            var car = await this.context.Cars.SingleOrDefaultAsync(c => c.Id == model.CarId);
+
+            if (user == null || car == null || user.Balance<car.Price) 
+            {
+                return false;
+            }
+
+            var buyCar = Mapper.Map<BuyCar>(model);
+
+            buyCar.User = user;
+            buyCar.BoughtOn = DateTime.UtcNow;
+            buyCar.Price = car.Price;
+
+            user.Balance -= car.Price;
+
+            this.context.BoughtCars.Add(buyCar);
+
+            await this.context.SaveChangesAsync();
+
+            return true;
+        }
+
+        public async Task<bool> Rent(RentCarBindingModel model, string username)
+        {
+            var user = await this.context.Users.SingleOrDefaultAsync(u => u.UserName == username);
+
+            var car = await this.context.Cars.SingleOrDefaultAsync(c => c.Id == model.CarId);
+
+            if (user == null || car == null) 
+            {
+                return false;
+            }
+
+            var rentCar = Mapper.Map<RentCar>(model);
+
+            rentCar.StartDate = DateTime.Now;
+
+            var totalDays = (model.EndDate - model.StartDate).Days;
+
+            rentCar.TotalPrice = totalDays * car.RentPricePerDay;
+
+            if (user.Balance < rentCar.TotalPrice) 
+            {
+                return false;
+            }
+
+            this.context.RentedCars.Add(rentCar);
+
+            await this.context.SaveChangesAsync();
+
+            return true;
+        }
+
+        public async Task<IEnumerable<Car>> GetAllByRating()
+        {
+            var carsByRating = await this.context.Cars.
+                OrderByDescending(c => c.Rating)
+                .ToArrayAsync();
+
+            return carsByRating;
+        }
     }
 }

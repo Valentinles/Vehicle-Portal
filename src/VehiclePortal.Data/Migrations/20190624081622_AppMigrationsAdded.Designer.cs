@@ -10,8 +10,8 @@ using VehiclePortal.Data;
 namespace VehiclePortal.Data.Migrations
 {
     [DbContext(typeof(VehiclePortalDbContext))]
-    [Migration("20190613094601_IdentityMigrations")]
-    partial class IdentityMigrations
+    [Migration("20190624081622_AppMigrationsAdded")]
+    partial class AppMigrationsAdded
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -87,11 +87,9 @@ namespace VehiclePortal.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.Property<string>("LoginProvider")
-                        .HasMaxLength(128);
+                    b.Property<string>("LoginProvider");
 
-                    b.Property<string>("ProviderKey")
-                        .HasMaxLength(128);
+                    b.Property<string>("ProviderKey");
 
                     b.Property<string>("ProviderDisplayName");
 
@@ -122,17 +120,100 @@ namespace VehiclePortal.Data.Migrations
                 {
                     b.Property<string>("UserId");
 
-                    b.Property<string>("LoginProvider")
-                        .HasMaxLength(128);
+                    b.Property<string>("LoginProvider");
 
-                    b.Property<string>("Name")
-                        .HasMaxLength(128);
+                    b.Property<string>("Name");
 
                     b.Property<string>("Value");
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("VehiclePortal.Models.BuyCar", b =>
+                {
+                    b.Property<int>("BuyCarId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("BoughtOn");
+
+                    b.Property<int>("CarId");
+
+                    b.Property<decimal>("Price");
+
+                    b.Property<string>("UserId");
+
+                    b.HasKey("BuyCarId");
+
+                    b.HasIndex("CarId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("BoughtCars");
+                });
+
+            modelBuilder.Entity("VehiclePortal.Models.Car", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Brand");
+
+                    b.Property<string>("CarModel");
+
+                    b.Property<int>("Category");
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("Features");
+
+                    b.Property<int>("Fuel");
+
+                    b.Property<string>("LargeImageUrl");
+
+                    b.Property<decimal>("Price");
+
+                    b.Property<int>("Rating");
+
+                    b.Property<decimal>("RentPricePerDay");
+
+                    b.Property<string>("SmallImageUrl");
+
+                    b.Property<int>("Transmission");
+
+                    b.Property<int>("Year");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Cars");
+                });
+
+            modelBuilder.Entity("VehiclePortal.Models.RentCar", b =>
+                {
+                    b.Property<int>("RentCarId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CarId");
+
+                    b.Property<DateTime>("EndDate");
+
+                    b.Property<DateTime>("StartDate");
+
+                    b.Property<decimal>("TotalPrice");
+
+                    b.Property<string>("UserId");
+
+                    b.HasKey("RentCarId");
+
+                    b.HasIndex("CarId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("RentedCars");
                 });
 
             modelBuilder.Entity("VehiclePortal.Models.VehiclePortalUser", b =>
@@ -143,6 +224,8 @@ namespace VehiclePortal.Data.Migrations
                     b.Property<int>("AccessFailedCount");
 
                     b.Property<string>("Address");
+
+                    b.Property<decimal>("Balance");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
@@ -235,6 +318,30 @@ namespace VehiclePortal.Data.Migrations
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("VehiclePortal.Models.BuyCar", b =>
+                {
+                    b.HasOne("VehiclePortal.Models.Car", "Car")
+                        .WithMany("Owners")
+                        .HasForeignKey("CarId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("VehiclePortal.Models.VehiclePortalUser", "User")
+                        .WithMany("OwnedCars")
+                        .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("VehiclePortal.Models.RentCar", b =>
+                {
+                    b.HasOne("VehiclePortal.Models.Car", "Car")
+                        .WithMany("Renters")
+                        .HasForeignKey("CarId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("VehiclePortal.Models.VehiclePortalUser", "User")
+                        .WithMany("CarsUnderRent")
+                        .HasForeignKey("UserId");
                 });
 #pragma warning restore 612, 618
         }

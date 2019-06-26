@@ -87,6 +87,16 @@ namespace VehiclePortal.Services.Implementations
                                     }).ToArrayAsync();
 
             return rentedCarsByUser;
-        } 
+        }
+
+        public async Task AddFunds(AddFundsBindingModel model, string username)
+        {
+            var user = await this.context.Users.SingleOrDefaultAsync(u => u.UserName == username);
+
+            user.Balance += model.Balance;
+
+            this.context.Update(user);
+            await this.context.SaveChangesAsync();
+        }
     }
 }

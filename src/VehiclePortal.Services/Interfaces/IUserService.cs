@@ -17,5 +17,7 @@ namespace VehiclePortal.Services.Interfaces
 
         Task<IEnumerable<RentedCarsViewModel>> GetAllRentedCarsByUser(string username);
 
+        Task AddFunds(AddFundsBindingModel model, string username);
+
     }
 }

@@ -45,5 +45,24 @@ namespace VehiclePortal.Web.Controllers
 
             return this.View(boughtCarsByUser);
         }
+
+        [HttpGet]
+        public IActionResult AddFunds()
+        {
+            return this.View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddFunds(AddFundsBindingModel model)
+        {
+            if(!ModelState.IsValid)
+            {
+                return NotFound();
+            }
+
+            await this.userService.AddFunds(model, this.User.Identity.Name);
+
+            return RedirectToAction("Index", "Home");
+        }
     }
 }

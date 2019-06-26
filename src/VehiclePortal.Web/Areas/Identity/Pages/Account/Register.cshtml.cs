@@ -53,6 +53,10 @@ namespace VehiclePortal.Web.Areas.Identity.Pages.Account
             public string Address { get; set; }
 
             [Required]
+            [Display(Name = "Balance")]
+            public decimal Balance { get; set; }
+
+            [Required]
             [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }
@@ -78,8 +82,8 @@ namespace VehiclePortal.Web.Areas.Identity.Pages.Account
         {
             returnUrl = returnUrl ?? Url.Content("~/");
             if (ModelState.IsValid)
-            {
-                var user = new VehiclePortalUser { UserName = Input.VehiclePortalUsername, Email = Input.Email, Address=Input.Address, Name=Input.Name };
+            { 
+                var user = new VehiclePortalUser { UserName = Input.VehiclePortalUsername, Email = Input.Email, Address=Input.Address, Name=Input.Name, Balance=Input.Balance};
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {

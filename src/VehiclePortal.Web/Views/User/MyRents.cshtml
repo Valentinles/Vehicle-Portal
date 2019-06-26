@@ -1,0 +1,13 @@
+﻿@model IEnumerable<VehiclePortal.Common.ViewModels.RentedCarsViewModel>
+@{
+    ViewData["Title"] = "MyRents";
+}
+
+<h1>MyRents</h1>
+
+@foreach (var car in Model)
+{
+    <p>@car.Car</p>
+    <p>@car.TotalPrice</p>
+    <p>@car.StartDate</p>
+}

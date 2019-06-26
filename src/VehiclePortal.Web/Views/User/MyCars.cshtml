@@ -1,0 +1,12 @@
+﻿@model IEnumerable<VehiclePortal.Common.ViewModels.SoldCarsViewModel>
+@{
+    ViewData["Title"] = "MyCars";
+}
+
+<h1>MyCars</h1>
+
+@foreach (var car in Model)
+{
+    <p>@car.Car</p>
+    <p>@car.BoughtOn</p>
+}

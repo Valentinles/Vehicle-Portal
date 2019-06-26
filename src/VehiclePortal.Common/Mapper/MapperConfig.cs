@@ -30,10 +30,6 @@ namespace VehiclePortal.Common.Mapper
                 .ForMember(m => m.RentPricePerDay, opt => opt.Ignore());
             this.CreateMap<BuyCar, BuyCarBindingModel>();
             this.CreateMap<RentCar, RentCarBindingModel>();
-
-
-
-
         }
     }
 }

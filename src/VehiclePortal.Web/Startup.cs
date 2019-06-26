@@ -61,6 +61,7 @@ namespace VehiclePortal.Web
             Mapper.Initialize(cfg => cfg.AddProfile<MapperConfig>());
 
             services.AddScoped<ICarService, CarService>();
+            services.AddScoped<IUserService, UserService>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }

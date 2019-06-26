@@ -1,0 +1,23 @@
+﻿@model IEnumerable<VehiclePortal.Common.ViewModels.SoldCarsViewModel>
+@{
+    ViewData["Title"] = "SoldCars";
+}
+<h1>SoldCars</h1>
+
+@{
+    decimal totalIncomeFromSales = 0;
+
+    @foreach (var car in Model)
+    {
+
+    <p>@car.BoughtOn</p>
+    <p>@car.Price</p>
+
+    <p>@car.Car</p>
+
+
+    <p>@car.User</p>
+        totalIncomeFromSales += car.Price;
+    }
+    }
+<p>@totalIncomeFromSales</p>

@@ -127,7 +127,7 @@ namespace VehiclePortal.Services.Implementations
             var buyCar = Mapper.Map<BuyCar>(model);
 
             buyCar.User = user;
-            buyCar.BoughtOn = DateTime.UtcNow;
+            buyCar.BoughtOn = DateTime.Now;
             buyCar.Price = car.Price;
 
             user.Balance -= car.Price;
@@ -151,8 +151,8 @@ namespace VehiclePortal.Services.Implementations
             }
 
             var rentCar = Mapper.Map<RentCar>(model);
-
             rentCar.StartDate = DateTime.Now;
+            rentCar.User = user;
 
             var totalDays = (model.EndDate - model.StartDate).Days;
 

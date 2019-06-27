@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using VehiclePortal.Common.ViewModels;
 using VehiclePortal.Services.Interfaces;
 
 namespace VehiclePortal.Web.Controllers
 {
+    [Authorize]
     public class CarController : Controller
     {
         private readonly ICarService carService;
@@ -18,12 +20,14 @@ namespace VehiclePortal.Web.Controllers
             this.carService = carService;
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult Add()
         {
             return this.View();
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> Add(CarBindingModel model)
         {
@@ -37,6 +41,7 @@ namespace VehiclePortal.Web.Controllers
             return RedirectToAction("All", "Car");
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
@@ -50,6 +55,7 @@ namespace VehiclePortal.Web.Controllers
             return this.View(car);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> Edit(EditCarViewModel model)
         {
@@ -58,6 +64,7 @@ namespace VehiclePortal.Web.Controllers
             return RedirectToAction("All", "Car");
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
@@ -71,6 +78,7 @@ namespace VehiclePortal.Web.Controllers
             return this.View(car);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> Delete(int id, CarDetailsViewModel model)
         {
@@ -79,6 +87,7 @@ namespace VehiclePortal.Web.Controllers
             return RedirectToAction("All", "Car");
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> All()
         {
             var cars = (await this.carService.GetAll())
@@ -87,6 +96,7 @@ namespace VehiclePortal.Web.Controllers
             return this.View(cars);
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> TopRated()
         {
             var cars = (await this.carService.GetAllByRating())

@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using VehiclePortal.Common.ViewModels;
 using VehiclePortal.Services.Interfaces;
 
 namespace VehiclePortal.Web.Controllers
 {
+    [Authorize]
     public class UserController : Controller
     {
         private readonly IUserService userService;
@@ -18,6 +20,7 @@ namespace VehiclePortal.Web.Controllers
             this.userService = userService;
         }
 
+        [Authorize(Roles ="Admin")]
         public async Task<IActionResult> SoldCars()
         {
             var soldCars = await this.userService.GetAllSoldCars();
@@ -25,6 +28,7 @@ namespace VehiclePortal.Web.Controllers
             return this.View(soldCars);
         }
 
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> RentedCars()
         {
             var rentedCars = await this.userService.GetAllRentedCars();

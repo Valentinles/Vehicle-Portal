@@ -7,51 +7,48 @@
 
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <script src="https://kit.fontawesome.com/f924ffe81b.js"></script>
     </environment>
     <environment exclude="Development">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
               asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
               crossorigin="anonymous"
-              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"/>
+              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" />
+        <script src="https://kit.fontawesome.com/f924ffe81b.js"></script>
     </environment>
-    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/NavBar.css" />
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">VehiclePortal.Web</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <partial name="_LoginPartial" />
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
+    <nav class="navbar-primary">
+        <ul class="navbar-primary-menu">
+            <li>
+                <a asp-action="Index" asp-controller="Home" title="Home"><i class="fas fa-home"></i><span class="nav-label">Home</span></a>
+
+                @if (User.Identity.IsAuthenticated)
+                {
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a asp-action="Add" asp-controller="Car"><i class="fas fa-plus"></i><span class="nav-label">Add</span></a>
+                        <a href="#"><i class="fas fa-edit"></i><span class="nav-label">Edit</span></a>
+                        <a href="#"><i class="fas fa-trash"></i><span class="nav-label">Delete</span></a>
+                        <a asp-action="SoldCars" asp-controller="User"><i class="fas fa-chart-line"></i><span class="nav-label">Sold Cars</span></a>
+                        <a asp-action="RentedCars" asp-controller="User"><i class="fas fa-hand-holding-usd"></i><span class="nav-label">Rented Cars</span></a>
+                    }
+                    <a asp-action="TopRated" asp-controller="Car"><i class="fas fa-star"></i><span class="nav-label">Top Rated</span></a>
+                    <a asp-action="All" asp-controller="Car"><i class="fas fa-shopping-cart"></i><span class="nav-label">Buy</span></a>
+                    <a asp-action="All" asp-controller="Car"><i class="fas fa-money-check-alt"></i><span class="nav-label">Rent</span></a>
+                }
+                <partial name="_LoginPartial" />
+            </li>
+        </ul>
+    </nav>
+    <div class="main-content">
         <partial name="_CookieConsentPartial" />
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2019 - VehiclePortal.Web - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>

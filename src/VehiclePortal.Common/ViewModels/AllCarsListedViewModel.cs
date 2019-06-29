@@ -7,6 +7,8 @@ namespace VehiclePortal.Common.ViewModels
 {
     public class AllCarsListedViewModel
     {
+        public int Id { get; set; }
+
         public string Brand { get; set; }
 
         public string CarModel { get; set; }

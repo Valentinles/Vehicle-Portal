@@ -1,9 +1,14 @@
 ﻿@model VehiclePortal.Common.ViewModels.AddFundsBindingModel
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<VehiclePortal.Models.VehiclePortalUser> UserManager
 @{
     ViewData["Title"] = "AddFunds";
 }
 
 <h1>AddFunds</h1>
+<h5>
+    @UserManager.GetUserAsync(User).Result.Balance
+</h5>
 <form asp-area="" asp-controller="User" asp-action="AddFunds">
     <div class="form-group">
         <label asp-for="Balance" class="control-label"></label>

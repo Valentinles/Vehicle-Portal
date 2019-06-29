@@ -3,16 +3,29 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using VehiclePortal.Common.ViewModels;
+using VehiclePortal.Services.Interfaces;
 using VehiclePortal.Web.Models;
 
 namespace VehiclePortal.Web.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        private readonly ICarService carService;
+
+        public HomeController(ICarService carService)
         {
-            return View();
+            this.carService = carService;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            var topRated = (await this.carService.GetAllByRating())
+                .Select(Mapper.Map<AllCarsListedViewModel>);
+
+            return View(topRated);
         }
 
         public IActionResult Privacy()

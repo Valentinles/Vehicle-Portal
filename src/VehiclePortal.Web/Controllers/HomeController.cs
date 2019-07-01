@@ -7,7 +7,6 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using VehiclePortal.Common.ViewModels;
 using VehiclePortal.Services.Interfaces;
-using VehiclePortal.Web.Models;
 
 namespace VehiclePortal.Web.Controllers
 {

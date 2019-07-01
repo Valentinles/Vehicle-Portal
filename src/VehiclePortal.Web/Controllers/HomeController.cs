@@ -27,7 +27,7 @@ namespace VehiclePortal.Web.Controllers
             return View(topRated);
         }
 
-        public IActionResult Privacy()
+        public IActionResult ApplicationError()
         {
             return View();
         }

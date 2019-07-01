@@ -102,8 +102,6 @@ namespace VehiclePortal.Services.Implementations
                 return false;
             }
 
-            var rate = Mapper.Map<Car>(model);
-
             car.Rating+=model.Rating;
 
             this.context.Cars.Update(car);

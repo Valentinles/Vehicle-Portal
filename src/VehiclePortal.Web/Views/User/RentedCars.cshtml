@@ -3,22 +3,41 @@
     ViewData["Title"] = "RentedCars";
 }
 
-<h1>RentedCars</h1>
 
 @{
-    decimal totalIncomeFromSales = 0;
-
-    @foreach (var car in Model)
-    {
-
-        <p>@car.EndDate</p>
-        <p>@car.TotalPrice</p>
-
-        <p>@car.Car</p>
-
-
-        <p>@car.User</p>
-        totalIncomeFromSales += car.TotalPrice;
-    }
+    decimal totalIncome = 0;
 }
-<p>@totalIncomeFromSales</p>
+
+<h1 class="display-4 text-center"><i class="fas fa-hand-holding-usd" style="color: darkorange"></i> Rented Cars</h1>
+
+<h5 class="text-center" style="padding-top:50px;"><i class="fas fa-car" style="color:darkorange;"></i> @Model.Count() rented</h5>
+<br />
+
+<table class="table table-borderless">
+    <thead>
+        <tr>
+            <th>User</th>
+            <th>Car</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var car in Model)
+        {
+            totalIncome += car.TotalPrice;
+
+            <tr>
+                <td>@car.User</td>
+                <td>@car.Car</td>
+                <td>@car.StartDate.Date.ToShortDateString()</td>
+                <td>@car.EndDate.Date.ToShortDateString()</td>
+                <td>@car.TotalPrice</td>
+            </tr>
+        }
+
+    </tbody>
+    <h5 class="text-center"><i class="fas fa-money-bill-alt" style="color:darkorange;"></i> @totalIncome$ earned</h5>
+    <hr class="w-50" />
+</table>

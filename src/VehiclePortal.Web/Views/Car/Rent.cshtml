@@ -3,13 +3,20 @@
     ViewData["Title"] = "Rent";
 }
 
-<h1>Rent</h1>
+<h1 class="display-4 text-center"><i class="fas fa-money-check-alt" style="color: darkorange"></i> Rent</h1>
 
-<p>@Model.Brand</p>
-<p>@Model.RentPricePerDay</p>
-<p>
-    @await Html.PartialAsync("_RentPartial", new VehiclePortal.Common.ViewModels.RentCarBindingModel
-                    {
-                        CarId = Model.Id
-                    })
-</p>
+<div class="row">
+    <div class="mx-auto">
+        <img src="@Model.SmallImageUrl" class="mx-auto d-block" />
+
+        <h3 class="text-center">@Model.Brand @Model.CarModel</h3>
+        <hr />
+        <h4 class="text-center">@Model.RentPricePerDay$ / day</h4>
+        <div class="form-group text-center">
+            @await Html.PartialAsync("_RentPartial", new VehiclePortal.Common.ViewModels.RentCarBindingModel
+                  {
+                      CarId = Model.Id
+                  })
+        </div>
+    </div>
+</div>

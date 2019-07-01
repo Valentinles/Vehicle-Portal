@@ -4,8 +4,10 @@
 *@
 
 <form asp-controller="Car" asp-action="Buy" method="post">
-    <div class="d-flex align-items-center">
-        <button type="submit" class="btn btn-outline-success">Confirm the purchase</button>
+    <div class="mx-auto" style=" padding-top:10px;">
+        <div class="mr-1">
+            <button type="submit" class="btn btn-outline-warning text-light" style="background-color: darkorange">Confirm the payment</button>
+        </div>
     </div>
     <input type="hidden" asp-for="CarId" value="@Model.CarId">
 </form>

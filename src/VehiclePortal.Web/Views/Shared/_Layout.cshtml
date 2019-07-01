@@ -3,7 +3,8 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - VehiclePortal.Web</title>
+    <link href="~/favicon1.ico" rel="shortcut icon" type="image/x-icon" />
+    <title>@ViewData["Title"] - VehiclePortal</title>
 
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
@@ -17,7 +18,7 @@
               integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" />
         <script src="https://kit.fontawesome.com/f924ffe81b.js"></script>
     </environment>
-    <link rel="stylesheet" href="~/css/NavBar.css" />
+    <link rel="stylesheet" href="~/css/site.css"/>
 </head>
 <body>
     <nav class="navbar-primary">
@@ -30,8 +31,8 @@
                     @if (User.IsInRole("Admin"))
                     {
                         <a asp-action="Add" asp-controller="Car"><i class="fas fa-plus"></i><span class="nav-label">Add</span></a>
-                        <a href="#"><i class="fas fa-edit"></i><span class="nav-label">Edit</span></a>
-                        <a href="#"><i class="fas fa-trash"></i><span class="nav-label">Delete</span></a>
+                        <a asp-action="All" asp-controller="Car"><i class="fas fa-edit"></i><span class="nav-label">Edit</span></a>
+                        <a asp-action="All" asp-controller="Car"><i class="fas fa-trash"></i><span class="nav-label">Delete</span></a>
                         <a asp-action="SoldCars" asp-controller="User"><i class="fas fa-chart-line"></i><span class="nav-label">Sold Cars</span></a>
                         <a asp-action="RentedCars" asp-controller="User"><i class="fas fa-hand-holding-usd"></i><span class="nav-label">Rented Cars</span></a>
                     }
@@ -43,12 +44,12 @@
             </li>
         </ul>
     </nav>
-    <div class="main-content">
-        <partial name="_CookieConsentPartial" />
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+        <div class="main-content">
+            <partial name="_CookieConsentPartial" />
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>

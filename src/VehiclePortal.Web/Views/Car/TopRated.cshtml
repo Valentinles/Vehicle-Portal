@@ -5,15 +5,21 @@
     ViewData["Title"] = "TopRated";
 }
 
-<h1>TopRated</h1>
+<h1 class="display-4 text-center"><i class="fas fa-star" style="color: darkorange"></i> Top Rated</h1>
 
-@foreach (var car in Model)
-{
-    <div class="container-fluid">
-        <p>@car.Brand</p>
-        <p>@car.Fuel</p>
-        <p>@car.Rating</p>
-        <img src="@car.SmallImageUrl" class="" style="width: 200px;" />
-        <img src="@car.LargeImageUrl" class="" style="width: 200px;" />
-    </div>
-}
+<div class="row">
+    @foreach (var car in Model)
+    {
+
+        <div class="col-md-4" style="padding-top: 30px;">
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="@car.SmallImageUrl" alt="Card image cap">
+                <div class="card-body text-center">
+                    <h5 class="card-title">@car.Brand @car.CarModel</h5>
+                        <p><i class="far fa-star" style="color: darkorange"></i> @car.Rating </p>
+                        <a asp-action="Details" asp-controller="Car" asp-route-id="@car.Id" class="btn"><i class="fas fa-info-circle" style="color: darkorange"></i> More</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>

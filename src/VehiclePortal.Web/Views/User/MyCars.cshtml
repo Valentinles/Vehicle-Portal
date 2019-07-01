@@ -3,10 +3,27 @@
     ViewData["Title"] = "MyCars";
 }
 
-<h1>MyCars</h1>
+<h1 class="display-4 text-center"><i class="fas fa-car" style="color: darkorange"></i> My Cars</h1>
 
-@foreach (var car in Model)
-{
-    <p>@car.Car</p>
-    <p>@car.BoughtOn</p>
-}
+<br />
+
+<table class="table table-bordered table-hover text-center ">
+    <thead>
+        <tr style="font-size: 30px;">
+            <th><i class="fas fa-car" style="color: darkorange" ></i></th>
+            <th><i class="fas fa-calendar-day" style="color: darkorange"></i></th>
+            <th><i class="fas fa-money-bill-alt" style="color: darkorange"></i></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var car in Model)
+        {
+            <tr>
+                <td><a asp-action="Details" asp-controller="Car" asp-route-id="@car.CarId">@car.Car</a></td>
+                <td>@car.BoughtOn.Date.ToShortDateString()</td>
+                <td>@car.Price$</td>
+            </tr>
+        }
+
+    </tbody>
+</table>

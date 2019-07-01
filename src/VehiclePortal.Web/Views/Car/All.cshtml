@@ -1,19 +1,44 @@
 ﻿@model IEnumerable<VehiclePortal.Common.ViewModels.AllCarsListedViewModel>
 @{
-    ViewData["Title"] = "All";
+    ViewData["Title"] = "Cars";
 }
 
-<h1>All</h1>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<h1 class="display-4 text-center"><i class="fas fa-car" style="color: darkorange"></i> Cars</h1>
 
+<div class="row">
+    @foreach (var car in Model)
+    {
 
-
-@foreach (var car in Model)
-{
-<div class="container-fluid">
-    <p>@car.Brand</p>
-    <p>@car.Fuel</p>
-    <p>@car.Rating</p>
-    <img src="@car.SmallImageUrl" class="" style="width: 200px;" />
+        <div class="col-md-4" style="padding-top: 30px;">
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="@car.SmallImageUrl" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">@car.Brand @car.CarModel</h5>
+                    <p class="card-text">@car.Price <i class="fas fa-dollar-sign"></i></p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Category: @car.Category</li>
+                    <li class="list-group-item">Transmission: @car.Transmission</li>
+                    <li class="list-group-item">Fuel: @car.Fuel</li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li class="list-group-item text-center">
+                                <a asp-action="Edit" asp-controller="Car" asp-route-id="@car.Id" class="btn"><i class="fas fa-edit" style="color: darkorange"></i> Edit</a>
+                                <a asp-action="Delete" asp-controller="Car" asp-route-id="@car.Id" class="btn"><i class="fas fa-trash" style="color: darkorange"></i> Delete</a>
+                            </li>
+                        }
+                    }
+                </ul>
+                <div class="row">
+                    <div class="card-body" style="padding-left: 30px;">
+                        <a asp-action="Buy" asp-controller="Car" asp-route-id="@car.Id" class="btn"><i class="fas fa-shopping-cart" style="color: darkorange"></i> Buy</a>
+                        <a asp-action="Rent" asp-controller="Car" asp-route-id="@car.Id" class="btn"><i class="fas fa-hand-holding-usd" style="color: darkorange"></i> Rent</a>
+                        <a asp-action="Details" asp-controller="Car" asp-route-id="@car.Id" class="btn"><i class="fas fa-info-circle" style="color: darkorange"></i> More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
 </div>
-}

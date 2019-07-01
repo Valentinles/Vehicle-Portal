@@ -3,19 +3,41 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1 class="display-4 text-center"><i class="fas fa-car" style="color: darkorange"></i> @Model.Brand @Model.CarModel</h1>
 
-<p>@Model.Brand</p>
-<p>@Model.Rating</p>
-@if (Model.Rating <= 5)
-{
-    <p>Awful</p>
-}
-<p>
-    @await Html.PartialAsync("_RatePartial", new VehiclePortal.Common.ViewModels.RateCarBindingModel
-                    {
-                        CarId = Model.Id
-                    })
-</p>
-<a asp-controller="Car" asp-action="Buy" asp-route-id="@Model.Id"><h4>Buy</h4></a>
-<a asp-controller="Car" asp-action="Rent" asp-route-id="@Model.Id"><h4>Rent</h4></a>
+
+<div class="container text-center">
+    <h1 class="my-4">
+        @Model.Category
+        <small>@Model.Year</small>
+    </h1>
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <img class="img-fluid" src="@Model.LargeImageUrl">
+        </div>
+        <div class="col-md-5 mx-auto">
+            <h3 class="my-3">Description</h3>
+            <p>@Model.Description</p>
+            <hr />
+            <h3 class="my-3">Features</h3>
+            <p>@Model.Features</p>
+            <hr />
+            <h3 class="my-3">Details</h3>
+            <div>
+                <p>@Model.Fuel</p>
+                <p>@Model.Transmission transimisson</p>
+                <a asp-action="Buy" asp-controller="Car" title="Buy" asp-route-id="@Model.Id" class="btn"><p><i class="fas fa-shopping-cart" style="color: darkorange"></i> @Model.Price$</p></a>
+                <a asp-action="Rent" asp-controller="Car" title="Rent" asp-route-id="@Model.Id" class="btn"><p><i class="fas fa-money-check-alt" style="color: darkorange"></i> @Model.RentPricePerDay$ / day</p></a>
+                <hr />
+                <p><i class="fas fa-heart" style="color: darkorange"></i> @Model.Rating</p>
+            </div>
+            <div>
+                @await Html.PartialAsync("_RatePartial", new VehiclePortal.Common.ViewModels.RateCarBindingModel
+                {
+                    CarId = Model.Id
+                })
+            </div>
+        </div>
+    </div>
+</div>
+

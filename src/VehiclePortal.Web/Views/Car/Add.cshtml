@@ -5,81 +5,109 @@
 }
 
 
-<h3 class="text-center">Add Car</h3>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Add">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
+<h1 class="display-4 text-center"><i class="fas fa-plus" style="color: darkorange"></i> Add</h1>
+
+<form asp-action="Add" style="padding-top:30px;">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm form-group">
                 <label asp-for="Brand" class="control-label"></label>
                 <input asp-for="Brand" class="form-control" />
                 <span asp-validation-for="Brand" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="CarModel" class="control-label"></label>
+            <div class="col-sm form-group">
+                <label asp-for="CarModel" class="control-label">Model</label>
                 <input asp-for="CarModel" class="form-control" />
                 <span asp-validation-for="CarModel" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="col-sm form-group">
                 <label asp-for="Year" class="control-label"></label>
                 <input asp-for="Year" class="form-control" />
                 <span asp-validation-for="Year" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Features" class="control-label"></label>
-                <input asp-for="Features" class="form-control" />
-                <span asp-validation-for="Features" class="text-danger"></span>
-            </div>
-            <div class="form-group">
+        </div>
+    </div>
+    <br />
+    <hr />
+    <br />
+    <div class="container">
+        <div class="row">
+            <div class="col-sm form-group">
                 <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
+                <textarea asp-for="Description" class="form-control"></textarea>
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Fuel" class="control-label"></label>
-                <select asp-for="Fuel" class="form-control dropdown-toggle col-lg-12" asp-items="Html.GetEnumSelectList<Fuel>()">
-                    <option selected="selected" value="">Please select</option>
-                </select>
-                <span asp-validation-for="Fuel" class="text-danger"></span>
+            <div class="col-sm form-group">
+                <label asp-for="Features" class="control-label"></label>
+                <textarea asp-for="Features" class="form-control"></textarea>
+                <span asp-validation-for="Features" class="text-danger"></span>
             </div>
-            <div class="form-group">
+        </div>
+    </div>
+    <br />
+    <hr />
+    <br />
+    <div class="container">
+        <div class="row">
+            <div class="col-sm form-group">
                 <label asp-for="Category" class="control-label"></label>
                 <select asp-for="Category" class="form-control dropdown-toggle col-lg-12" asp-items="Html.GetEnumSelectList<Category>()">
                     <option selected="selected" value="">Please select</option>
                 </select>
                 <span asp-validation-for="Category" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="col-sm form-group">
+                <label asp-for="Fuel" class="control-label"></label>
+                <select asp-for="Fuel" class="form-control dropdown-toggle col-lg-12" asp-items="Html.GetEnumSelectList<Fuel>()">
+                    <option selected="selected" value="">Please select</option>
+                </select>
+                <span asp-validation-for="Fuel" class="text-danger"></span>
+            </div>
+            <div class="col-sm form-group">
                 <label asp-for="Transmission" class="control-label"></label>
                 <select asp-for="Transmission" class="form-control dropdown-toggle col-lg-12" asp-items="Html.GetEnumSelectList<Transmission>()">
                     <option selected="selected" value="">Please select</option>
                 </select>
                 <span asp-validation-for="Transmission" class="text-danger"></span>
             </div>
-            <div class="form-group">
+        </div>
+    </div>
+    <br />
+    <hr />
+    <br />
+    <div class="container">
+        <div class="row">
+            <div class="col-sm form-group">
                 <label asp-for="SmallImageUrl" class="control-label"></label>
                 <textarea asp-for="SmallImageUrl" class="form-control"></textarea>
                 <span asp-validation-for="SmallImageUrl" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="col-sm form-group">
                 <label asp-for="LargeImageUrl" class="control-label"></label>
-                <input asp-for="LargeImageUrl" class="form-control" />
+                <textarea asp-for="LargeImageUrl" class="form-control"></textarea>
                 <span asp-validation-for="LargeImageUrl" class="text-danger"></span>
             </div>
-            <div class="form-group">
+        </div>
+    </div>
+    <br />
+    <hr />
+    <br />
+    <div class="container">
+        <div class="row">
+            <div class="col-sm form-group">
                 <label asp-for="Price" class="control-label"></label>
-                <input asp-for="Price" class="form-control" />
+                <input asp-for="Price" class="form-control">
                 <span asp-validation-for="Price" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="col-sm form-group">
                 <label asp-for="RentPricePerDay" class="control-label"></label>
-                <input asp-for="RentPricePerDay" class="form-control" />
+                <input asp-for="RentPricePerDay" class="form-control">
                 <span asp-validation-for="RentPricePerDay" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Add" class="btn text-light"  style="background-color: #333" />
-            </div>
-        </form>
+        </div>
     </div>
+    <div class="form-group text-center">
+        <input type="submit" value="Add" class="btn btn-outline-warning text-light" style="background-color: darkorange" />
 </div>
+</form>

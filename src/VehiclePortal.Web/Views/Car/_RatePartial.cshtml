@@ -3,13 +3,13 @@
     For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 *@
 <form asp-controller="Car" asp-action="Rate" method="post">
-    <div class="d-flex align-items-center">
+    <div class="mx-auto" style="padding-top:10px;">
         <div class="mr-1">
             
             <input class="form-control" type="hidden" value="1" asp-for="Rating" />
             <span asp-validation-for="Rating" class="text-danger"></span>
         </div>
-        <button type="submit" class="btn btn-outline-success">Vote</button>
+        <button type="submit" class="btn btn-outline-warning text-light" style="background-color: darkorange">Rate</button>
     </div>
     <input type="hidden" asp-for="CarId" value="@Model.CarId">
 </form>

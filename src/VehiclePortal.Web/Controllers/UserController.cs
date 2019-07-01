@@ -61,7 +61,7 @@ namespace VehiclePortal.Web.Controllers
         {
             if(!ModelState.IsValid)
             {
-                return NotFound();
+                return RedirectToAction("ApplicationError","Home");
             }
 
             await this.userService.AddFunds(model, this.User.Identity.Name);

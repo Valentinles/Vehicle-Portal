@@ -33,7 +33,7 @@ namespace VehiclePortal.Web.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return NotFound();
+                return RedirectToAction("ApplicationError", "Home");
             }
 
             await this.carService.Add(model);
@@ -49,7 +49,7 @@ namespace VehiclePortal.Web.Controllers
 
             if (car == null)
             {
-                return this.NotFound();
+                return RedirectToAction("ApplicationError", "Home");
             }
 
             return this.View(car);
@@ -72,7 +72,7 @@ namespace VehiclePortal.Web.Controllers
 
             if (car == null)
             {
-                return this.NotFound();
+                return RedirectToAction("ApplicationError", "Home");
             }
 
             return this.View(car);
@@ -111,7 +111,7 @@ namespace VehiclePortal.Web.Controllers
 
             if (car == null)
             {
-                return this.NotFound();
+                return RedirectToAction("ApplicationError", "Home");
             }
 
             return this.View(car);
@@ -121,7 +121,7 @@ namespace VehiclePortal.Web.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return NotFound();
+                return RedirectToAction("ApplicationError", "Home");
             }
 
             var rate = await this.carService.Rate(model);
@@ -136,7 +136,7 @@ namespace VehiclePortal.Web.Controllers
 
             if (car == null)
             {
-                return this.NotFound();
+                return RedirectToAction("ApplicationError", "Home");
             }
 
             return this.View(car);
@@ -149,7 +149,7 @@ namespace VehiclePortal.Web.Controllers
 
             if(!result)
             {
-                return this.NotFound();
+                return RedirectToAction("ApplicationError", "Home");
             }
 
             return RedirectToAction("MyCars", "User");
@@ -162,7 +162,7 @@ namespace VehiclePortal.Web.Controllers
 
             if (car == null)
             {
-                return this.NotFound();
+                return RedirectToAction("ApplicationError", "Home");
             }
 
             return this.View(car);
@@ -175,7 +175,7 @@ namespace VehiclePortal.Web.Controllers
 
             if (!result)
             {
-                return this.NotFound();
+                return RedirectToAction("ApplicationError", "Home");
             }
 
             return RedirectToAction("MyRents", "User");

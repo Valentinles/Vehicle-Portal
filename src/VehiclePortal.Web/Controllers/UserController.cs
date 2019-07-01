@@ -66,7 +66,7 @@ namespace VehiclePortal.Web.Controllers
 
             await this.userService.AddFunds(model, this.User.Identity.Name);
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("AddFunds", "User");
         }
     }
 }

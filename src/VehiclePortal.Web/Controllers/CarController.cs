@@ -126,7 +126,7 @@ namespace VehiclePortal.Web.Controllers
 
             var rate = await this.carService.Rate(model);
 
-            return RedirectToAction("All", "Car");
+            return RedirectToAction("TopRated", "Car");
         }
 
         [HttpGet]
@@ -152,7 +152,7 @@ namespace VehiclePortal.Web.Controllers
                 return this.NotFound();
             }
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("MyCars", "User");
         }
 
         [HttpGet]
@@ -178,7 +178,7 @@ namespace VehiclePortal.Web.Controllers
                 return this.NotFound();
             }
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("MyRents", "User");
         }
     }
 }

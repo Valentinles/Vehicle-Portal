@@ -46,7 +46,6 @@ namespace VehiclePortal.Services.Implementations
             car.LargeImageUrl = model.LargeImageUrl;
             car.SmallImageUrl = model.SmallImageUrl;
             car.Price = model.Price;
-            car.Rating = model.Rating;
             car.Transmission = model.Transmission;
             car.Year = model.Year;
 

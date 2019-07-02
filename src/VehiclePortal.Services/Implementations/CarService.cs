@@ -88,7 +88,7 @@ namespace VehiclePortal.Services.Implementations
 
         public async Task<IEnumerable<Car>> GetAll()
         {
-            var car = await this.context.Cars.ToArrayAsync();
+            var car = await this.context.Cars.OrderBy(x=>x.Price).ToArrayAsync();
 
             return car;
         }

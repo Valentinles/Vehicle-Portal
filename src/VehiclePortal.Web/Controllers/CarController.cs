@@ -85,7 +85,6 @@ namespace VehiclePortal.Web.Controllers
             return RedirectToAction("All", "Car");
         }
 
-        [AllowAnonymous]
         public async Task<IActionResult> All()
         {
             var cars = (await this.carService.GetAll())

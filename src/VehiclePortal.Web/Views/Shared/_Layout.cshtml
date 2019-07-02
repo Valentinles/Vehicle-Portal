@@ -25,6 +25,7 @@
         <ul class="navbar-primary-menu">
             <li>
                 <a asp-action="Index" asp-controller="Home" title="Home"><i class="fas fa-home"></i><span class="nav-label">Home</span></a>
+                <a asp-action="TopRated" asp-controller="Car"><i class="fas fa-star"></i><span class="nav-label">Top Rated</span></a>
 
                 @if (User.Identity.IsAuthenticated)
                 {
@@ -36,7 +37,6 @@
                         <a asp-action="SoldCars" asp-controller="User"><i class="fas fa-chart-line"></i><span class="nav-label">Sold Cars</span></a>
                         <a asp-action="RentedCars" asp-controller="User"><i class="fas fa-hand-holding-usd"></i><span class="nav-label">Rented Cars</span></a>
                     }
-                    <a asp-action="TopRated" asp-controller="Car"><i class="fas fa-star"></i><span class="nav-label">Top Rated</span></a>
                     <a asp-action="All" asp-controller="Car"><i class="fas fa-shopping-cart"></i><span class="nav-label">Buy</span></a>
                     <a asp-action="All" asp-controller="Car"><i class="fas fa-money-check-alt"></i><span class="nav-label">Rent</span></a>
                 }

@@ -5,14 +5,15 @@
 
 <div class="mx-auto" style="padding-top:20px;">
     <form asp-controller="Car" asp-action="Rent" method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
             <label asp-for="StartDate" class="control-label">Start Date </label>
-            <input asp-for="StartDate" date class="form-control" />
+            <input asp-for="StartDate" value="@DateTime.Now.ToString("yyyy-MM-dd")" min="@DateTime.Now.ToString("yyyy-MM-dd")"  date class="form-control" />
             <span asp-validation-for="StartDate" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="EndDate" class="control-label">End Date</label>
-            <input asp-for="EndDate" class="form-control" />
+            <input asp-for="EndDate" value="@DateTime.Now.AddDays(1).ToString("yyyy-MM-dd")" min="@DateTime.Now.AddDays(1).ToString("yyyy-MM-dd")" class="form-control" />
             <span asp-validation-for="EndDate" class="text-danger"></span>
         </div>
         <div class=" form-group mx-auto">
@@ -21,3 +22,4 @@
         <input type="hidden" asp-for="CarId" value="@Model.CarId">
     </form>
 </div>
+

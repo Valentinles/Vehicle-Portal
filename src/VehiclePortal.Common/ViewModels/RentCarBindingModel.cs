@@ -18,10 +18,12 @@ namespace VehiclePortal.Common.ViewModels
 
         public Car Car { get; set; }
 
+        [Required]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         [DataType(DataType.Date)]
         public DateTime StartDate { get; set; }
 
+        [Required]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         [DataType(DataType.Date)]
         public DateTime EndDate { get; set; }

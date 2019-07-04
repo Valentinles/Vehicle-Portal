@@ -31,7 +31,7 @@ namespace VehiclePortal.Web.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return RedirectToAction("ApplicationError", "Home");
+                return this.View();
             }
 
             await this.carService.Add(model);
@@ -123,7 +123,7 @@ namespace VehiclePortal.Web.Controllers
 
             var rate = await this.carService.Rate(model);
 
-            return RedirectToAction("TopRated", "Car");
+            return RedirectToAction("Details", "Car", new { id=model.CarId });
         }
 
         [HttpGet]

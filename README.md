@@ -7,7 +7,7 @@
 ###### To run the application you need:
 - .NET Core 2.2 
 
-- If you don't have *Sql server* on your machine you should replace the configuration in *VehiclePortal.Web/appsettings.json* with this code
+- If you don't have *Sql server* on your machine you should replace the configuration in *VehiclePortal.Web/appsettings.json* with this code:
 ```
 {
   "ConnectionStrings": {
@@ -21,7 +21,7 @@
   "AllowedHosts": "*"
 }
 ```
-- In your *package manger console* type 
+- In your *package manger console* type: 
 
 ```
 update-database

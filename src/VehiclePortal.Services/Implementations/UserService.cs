@@ -10,6 +10,7 @@ using VehiclePortal.Services.Interfaces;
 using VehiclePortal.Common.ViewModels;
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
+using VehiclePortal.Common.ServiceModels;
 
 namespace VehiclePortal.Services.Implementations
 {
@@ -19,77 +20,41 @@ namespace VehiclePortal.Services.Implementations
         {
         }
 
-        public async Task<IEnumerable<RentedCarsViewModel>> GetAllRentedCars()
+        public async Task<IEnumerable<RentCar>> GetAllRentedCars()
         {
-            var rentedCars = await(from rc in context.RentedCars
-                                 join c in context.Cars
-                                 on rc.CarId equals c.Id
-                                 select new RentedCarsViewModel
-                                 {
-                                     CarId = c.Id,
-                                     Car = c.CarModel,
-                                     User = rc.User.UserName,
-                                     StartDate = rc.StartDate,
-                                     EndDate=rc.EndDate,
-                                     TotalPrice = rc.TotalPrice
-                                 }).ToArrayAsync();
+            var rentedCars = await this.context.RentedCars.Include(c => c.Car).Include(rc=>rc.User).ToListAsync();
 
             return rentedCars;
         }
 
-        public async Task<IEnumerable<SoldCarsViewModel>> GetAllSoldCars()
+        public async Task<IEnumerable<BuyCar>> GetAllSoldCars()
         {
-            var soldCars = await ( from sc in context.BoughtCars
-                            join c in context.Cars
-                            on sc.CarId equals c.Id
-                            select new SoldCarsViewModel
-                            {
-                                CarId = c.Id,
-                                Car = c.CarModel,
-                                User = sc.User.UserName,
-                                BoughtOn=sc.BoughtOn,
-                                Price=sc.Price
-                            }).ToArrayAsync();
+            var soldCars = await this.context.BoughtCars.Include(c => c.Car).Include(rc => rc.User).ToListAsync();
 
             return soldCars;
         }
 
-        public async Task<IEnumerable<SoldCarsViewModel>> GetAllBoughtCarsByUser(string username)
+        public async Task<IEnumerable<BuyCar>> GetAllBoughtCarsByUser(string username)
         {
-            var boughtCarsByUser = await (from sc in context.BoughtCars
-                                  join c in context.Cars
-                                  on sc.CarId equals c.Id
-                                  where sc.User.UserName == username
-                                  select new SoldCarsViewModel
-                                  {
-                                      CarId = c.Id,
-                                      Car = c.CarModel,
-                                      BoughtOn = sc.BoughtOn,
-                                      Price = sc.Price
-                                  }).ToArrayAsync();
+            var boughtCarsByUser = await this.context.BoughtCars
+                .Include(c => c.Car)
+                .Where(u => u.User.UserName == username)
+                .ToListAsync();
 
             return boughtCarsByUser;
         }
 
-        public async Task<IEnumerable<RentedCarsViewModel>> GetAllRentedCarsByUser(string username)
+        public async Task<IEnumerable<RentCar>> GetAllRentedCarsByUser(string username)
         {
-            var rentedCarsByUser = await (from rc in context.RentedCars
-                                    join c in context.Cars
-                                    on rc.CarId equals c.Id
-                                    where rc.User.UserName==username
-                                    select new RentedCarsViewModel
-                                    {
-                                        CarId = c.Id,
-                                        Car = c.CarModel,
-                                        StartDate = rc.StartDate,
-                                        EndDate = rc.EndDate,
-                                        TotalPrice = rc.TotalPrice
-                                    }).ToArrayAsync();
-
+            var rentedCarsByUser = await this.context.RentedCars
+                .Include(c => c.Car)
+                .Where(u => u.User.UserName == username)
+                .ToListAsync();
+     
             return rentedCarsByUser;
         }
 
-        public async Task AddFunds(AddFundsBindingModel model, string username)
+        public async Task AddFunds(AddFundsServiceModel model, string username)
         {
             var user = await this.context.Users.SingleOrDefaultAsync(u => u.UserName == username);
 

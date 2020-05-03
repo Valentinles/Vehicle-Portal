@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using VehiclePortal.Common.ServiceModels;
 using VehiclePortal.Common.ViewModels;
 using VehiclePortal.Models;
 
@@ -9,15 +10,15 @@ namespace VehiclePortal.Services.Interfaces
 {
     public interface IUserService
     {
-        Task<IEnumerable<RentedCarsViewModel>> GetAllRentedCars();
+        Task<IEnumerable<RentCar>> GetAllRentedCars();
 
-        Task<IEnumerable<SoldCarsViewModel>> GetAllSoldCars();
+        Task<IEnumerable<BuyCar>> GetAllSoldCars();
 
-        Task<IEnumerable<SoldCarsViewModel>> GetAllBoughtCarsByUser(string username);
+        Task<IEnumerable<BuyCar>> GetAllBoughtCarsByUser(string username);
 
-        Task<IEnumerable<RentedCarsViewModel>> GetAllRentedCarsByUser(string username);
+        Task<IEnumerable<RentCar>> GetAllRentedCarsByUser(string username);
 
-        Task AddFunds(AddFundsBindingModel model, string username);
+        Task AddFunds(AddFundsServiceModel model, string username);
 
     }
 }

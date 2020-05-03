@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using VehiclePortal.Models;
 
-namespace VehiclePortal.Common.ViewModels
+namespace VehiclePortal.Common.ServiceModels
 {
-    public class RateCarBindingModel
+    public class RateCarServiceModel
     {
         public int CarId { get; set; }
 

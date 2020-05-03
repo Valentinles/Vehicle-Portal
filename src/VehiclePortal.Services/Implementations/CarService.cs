@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VehiclePortal.Common.ServiceModels;
 using VehiclePortal.Common.ViewModels;
 using VehiclePortal.Data;
 using VehiclePortal.Models;
@@ -19,16 +20,13 @@ namespace VehiclePortal.Services.Implementations
         {
         }
 
-        public async Task Add(CarBindingModel model)
-        {
-            var car = Mapper.Map<Car>(model);
-
+        public async Task Add(Car car)
+        {          
             await this.context.AddAsync(car);
-
             await this.context.SaveChangesAsync();
         }
 
-        public async Task Edit(EditCarViewModel model)
+        public async Task Edit(EditCarServiceModel model)
         {
             var car = await this.context.Cars.FirstOrDefaultAsync(c => c.Id == model.Id);
 
@@ -67,20 +65,16 @@ namespace VehiclePortal.Services.Implementations
             await this.context.SaveChangesAsync();
         }
 
-        public async Task<EditCarViewModel> GetById(int id)
+        public async Task<Car> GetById(int id)
         {
-            var car = await this.context.Cars
-                .ProjectTo<EditCarViewModel>()
-                .FirstOrDefaultAsync(c => c.Id == id);
+            var car = await this.context.Cars.FirstOrDefaultAsync(c => c.Id == id);
 
             return car;
         }
 
-        public async Task<CarDetailsViewModel> Details(int id)
+        public async Task<Car> Details(int id)
         {
-            var car = await this.context.Cars
-                .ProjectTo<CarDetailsViewModel>()
-                .FirstOrDefaultAsync(c => c.Id == id);
+            var car = await this.context.Cars.FirstOrDefaultAsync(c => c.Id == id);
 
             return car;
         }
@@ -92,9 +86,11 @@ namespace VehiclePortal.Services.Implementations
             return car;
         }
 
-        public async Task<bool> Rate(RateCarBindingModel model)
+        public async Task<bool> Rate(RateCarServiceModel model, string username)
         {
             var car = await this.context.Cars.SingleOrDefaultAsync(c => c.Id == model.CarId);
+
+            var user = await this.context.Users.FirstOrDefaultAsync(u => u.UserName == username);
 
             if (car == null)
             {
@@ -103,6 +99,8 @@ namespace VehiclePortal.Services.Implementations
 
             car.Rating+=model.Rating;
 
+            user.IsRated = true;
+
             this.context.Cars.Update(car);
 
             await this.context.SaveChangesAsync();
@@ -110,18 +108,16 @@ namespace VehiclePortal.Services.Implementations
             return true;
         }
 
-        public async Task<bool> Buy(BuyCarBindingModel model, string username)
+        public async Task<bool> Buy(BuyCar buyCar, string username)
         {
             var user = await this.context.Users.SingleOrDefaultAsync(u => u.UserName == username);
 
-            var car = await this.context.Cars.SingleOrDefaultAsync(c => c.Id == model.CarId);
+            var car = await this.context.Cars.SingleOrDefaultAsync(c => c.Id == buyCar.CarId);
 
             if (user == null || car == null || user.Balance<car.Price) 
             {
                 return false;
             }
-
-            var buyCar = Mapper.Map<BuyCar>(model);
 
             buyCar.User = user;
             buyCar.BoughtOn = DateTime.Now;
@@ -136,24 +132,25 @@ namespace VehiclePortal.Services.Implementations
             return true;
         }
 
-        public async Task<bool> Rent(RentCarBindingModel model, string username)
+        public async Task<bool> Rent(RentCar rentCar, string username)
         {
             var user = await this.context.Users.SingleOrDefaultAsync(u => u.UserName == username);
 
-            var car = await this.context.Cars.SingleOrDefaultAsync(c => c.Id == model.CarId);
+            var car = await this.context.Cars.SingleOrDefaultAsync(c => c.Id == rentCar.CarId);
 
             if (user == null || car == null) 
             {
                 return false;
             }
 
-            var rentCar = Mapper.Map<RentCar>(model);
             rentCar.StartDate = DateTime.Now;
             rentCar.User = user;
 
-            var totalDays = (model.EndDate - model.StartDate).Days;
+            var totalDays = (rentCar.EndDate - rentCar.StartDate).Days + 1;
 
             rentCar.TotalPrice = totalDays * car.RentPricePerDay;
+
+            user.Balance -= rentCar.TotalPrice;
 
             if (user.Balance < rentCar.TotalPrice) 
             {

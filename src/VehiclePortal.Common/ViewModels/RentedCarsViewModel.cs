@@ -14,7 +14,7 @@ namespace VehiclePortal.Common.ViewModels
 
         public int CarId { get; set; }
 
-        public string Car { get; set; }
+        public Car Car { get; set; }
 
         public DateTime StartDate { get; set; }
 

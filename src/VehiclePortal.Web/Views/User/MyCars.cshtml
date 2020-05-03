@@ -19,7 +19,7 @@
         @foreach (var car in Model)
         {
             <tr>
-                <td><a asp-action="Details" asp-controller="Car" asp-route-id="@car.CarId">@car.Car</a></td>
+                <td><a asp-action="Details" asp-controller="Car" asp-route-id="@car.CarId">@car.Car.Brand @car.Car.CarModel</a></td>
                 <td>@car.BoughtOn.Date.ToShortDateString()</td>
                 <td>@car.Price$</td>
             </tr>

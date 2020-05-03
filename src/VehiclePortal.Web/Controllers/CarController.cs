@@ -3,7 +3,9 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using VehiclePortal.Common.ServiceModels;
 using VehiclePortal.Common.ViewModels;
+using VehiclePortal.Models;
 using VehiclePortal.Services.Interfaces;
 
 namespace VehiclePortal.Web.Controllers
@@ -34,7 +36,9 @@ namespace VehiclePortal.Web.Controllers
                 return this.View();
             }
 
-            await this.carService.Add(model);
+            var car = Mapper.Map<Car>(model);
+
+            await this.carService.Add(car);
 
             return RedirectToAction("All", "Car");
         }
@@ -43,7 +47,9 @@ namespace VehiclePortal.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            var car = await this.carService.GetById(id);
+            var getCar = await this.carService.GetById(id);
+
+            var car = Mapper.Map<EditCarViewModel>(getCar);
 
             if (car == null)
             {
@@ -57,7 +63,9 @@ namespace VehiclePortal.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(EditCarViewModel model)
         {
-            await this.carService.Edit(model);
+            var car = Mapper.Map<EditCarServiceModel>(model);
+
+            await this.carService.Edit(car);
 
             return RedirectToAction("All", "Car");
         }
@@ -66,7 +74,9 @@ namespace VehiclePortal.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
-            var car = await this.carService.GetById(id);
+            var getCar = await this.carService.GetById(id);
+
+            var car = Mapper.Map<EditCarViewModel>(getCar);
 
             if (car == null)
             {
@@ -104,7 +114,9 @@ namespace VehiclePortal.Web.Controllers
 
         public async Task<IActionResult> Details(int id)
         {
-            var car = await this.carService.Details(id);
+            var getCar = await this.carService.Details(id);
+
+            var car = Mapper.Map<CarDetailsViewModel>(getCar);
 
             if (car == null)
             {
@@ -121,15 +133,19 @@ namespace VehiclePortal.Web.Controllers
                 return RedirectToAction("ApplicationError", "Home");
             }
 
-            var rate = await this.carService.Rate(model);
+            var mapRate = Mapper.Map<RateCarServiceModel>(model);
 
-            return RedirectToAction("Details", "Car", new { id=model.CarId });
+            await this.carService.Rate(mapRate, this.User.Identity.Name);
+
+            return RedirectToAction("Details", "Car", new { id = model.CarId });
         }
 
         [HttpGet]
         public async Task<IActionResult> Buy(int id)
         {
-            var car = await this.carService.Details(id);
+            var getCar = await this.carService.Details(id);
+
+            var car = Mapper.Map<CarDetailsViewModel>(getCar);
 
             if (car == null)
             {
@@ -142,9 +158,11 @@ namespace VehiclePortal.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Buy(BuyCarBindingModel model)
         {
-            var result = await this.carService.Buy(model, this.User.Identity.Name);
+            var buyCar = Mapper.Map<BuyCar>(model);
 
-            if(!result)
+            var result = await this.carService.Buy(buyCar, this.User.Identity.Name);
+
+            if (!result)
             {
                 return RedirectToAction("ApplicationError", "Home");
             }
@@ -155,7 +173,9 @@ namespace VehiclePortal.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Rent(int id)
         {
-            var car = await this.carService.Details(id);
+            var getCar = await this.carService.Details(id);
+
+            var car = Mapper.Map<CarDetailsViewModel>(getCar);
 
             if (car == null)
             {
@@ -168,7 +188,9 @@ namespace VehiclePortal.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Rent(RentCarBindingModel model)
         {
-            var result = await this.carService.Rent(model, this.User.Identity.Name);
+            var rentCar = Mapper.Map<RentCar>(model);
+
+            var result = await this.carService.Rent(rentCar, this.User.Identity.Name);
 
             if (!result)
             {

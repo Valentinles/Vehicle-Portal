@@ -23,6 +23,8 @@ namespace VehiclePortal.Models
 
         public decimal Balance { get; set; }
 
+        public bool IsRated { get; set; }
+
         public ICollection<BuyCar> OwnedCars { get; set; }
 
         public ICollection<RentCar> CarsUnderRent { get; set; }

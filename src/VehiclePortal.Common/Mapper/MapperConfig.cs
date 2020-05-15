@@ -18,6 +18,7 @@ namespace VehiclePortal.Common.Mapper
             this.CreateMap<RentCar, RentCarBindingModel>();
             this.CreateMap<AddFundsServiceModel, AddFundsBindingModel>();
             this.CreateMap<EditCarServiceModel, EditCarViewModel>();
+            this.CreateMap<CompareCarsServiceModel, CompareCarsViewModel>();
         }
     }
 }

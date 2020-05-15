@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using VehiclePortal.Common.ViewModels;
 using VehiclePortal.Services.Interfaces;
 
@@ -21,6 +22,11 @@ namespace VehiclePortal.Web.Controllers
 
         public async Task<IActionResult> Index()
         {
+            var allCars = (await this.carService.GetAll())
+                .Select(Mapper.Map<AllCarsListedViewModel>);
+
+            ViewData["Cars"] = new SelectList(allCars, "Id","CarModel");
+
             var topRated = (await this.carService.GetAllByRating())
                 .Select(Mapper.Map<AllCarsListedViewModel>);
 

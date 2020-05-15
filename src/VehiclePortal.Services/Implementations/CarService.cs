@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using VehiclePortal.Common.ServiceModels;
-using VehiclePortal.Common.ViewModels;
 using VehiclePortal.Data;
 using VehiclePortal.Models;
 using VehiclePortal.Services.Interfaces;
@@ -171,6 +170,19 @@ namespace VehiclePortal.Services.Implementations
                 .ToArrayAsync();
 
             return carsByRating;
+        }
+
+        public async Task<CompareCarsServiceModel> CompareCars(int firstCarId, int secondCarId)
+        {
+            var firstCar = await this.context.Cars.FirstOrDefaultAsync(c => c.Id == firstCarId);
+
+            var secondCar = await this.context.Cars.FirstOrDefaultAsync(c => c.Id == secondCarId);
+
+            return new CompareCarsServiceModel
+            {
+                FirstCar = firstCar,
+                SecondCar = secondCar
+            };
         }
     }
 }

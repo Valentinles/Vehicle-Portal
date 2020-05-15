@@ -30,5 +30,6 @@ namespace VehiclePortal.Services.Interfaces
 
         Task<bool> Rent(RentCar rentCar, string username);
 
+        Task<CompareCarsServiceModel> CompareCars(int firstCarId, int secondCarId);
     }
 }

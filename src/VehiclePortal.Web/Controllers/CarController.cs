@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using VehiclePortal.Common.ServiceModels;
 using VehiclePortal.Common.ViewModels;
 using VehiclePortal.Models;
@@ -198,6 +199,20 @@ namespace VehiclePortal.Web.Controllers
             }
 
             return RedirectToAction("MyRents", "User");
+        }
+
+        public async Task<IActionResult> CompareCars(int firstCarId, int secondCarId)
+        {
+            var getCars = await this.carService.CompareCars(firstCarId, secondCarId);
+
+            var carsToCompare = Mapper.Map<CompareCarsViewModel>(getCars);
+
+            if (carsToCompare == null)
+            {
+                return RedirectToAction("ApplicationError", "Home");
+            }
+
+            return this.View(carsToCompare);
         }
     }
 }

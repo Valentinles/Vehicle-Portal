@@ -51,7 +51,33 @@
     </p>
     <footer class="blockquote-footer"><cite title="Source Title">Lewis Hamilton</cite></footer>
 </blockquote>
-
+<br />
+<br />
+<h1 class="display-4 text-center"><i class="fas fa-greater-than-equal" style="color: darkorange"></i> Compare Cars</h1>
+@if (ViewBag == null)
+{
+    <h1 class="display-4 text-center">There are no cars to compare.<a asp-action="Add" asp-controller="Car">Add</a> cars.</h1>
+}
+else
+{
+    <form asp-controller="Car" asp-action="CompareCars" method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="text-center">
+            <div class="col-sm-4 mx-auto form-group">
+                <select class="form-control" name="firstCarId" asp-items="ViewBag.Cars">
+                </select>
+            </div>
+            <div class="col-sm-4 mx-auto form-group">
+                <select class="form-control" name="secondCarId" asp-items="ViewBag.Cars">
+                </select>
+            </div>
+            <button type="submit" class="btn btn-outline-warning text-light" style="background-color: darkorange">Compare</button>
+        </div>
+    </form>
+}
+<br />
+<br />
+<h1 class="display-4 text-center"><i class="fas fa-star" style="color: darkorange"></i> Top Rated</h1>
 <div class="row">
 
     @foreach (var car in Model.Take(3))

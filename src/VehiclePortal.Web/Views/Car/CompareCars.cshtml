@@ -1,0 +1,96 @@
+﻿@model CompareCarsViewModel
+@{
+    ViewData["Title"] = "CompareCars";
+}
+
+<h1 class="display-4 text-center">
+    <i class="fas fa-greater-than-equal" style="color: darkorange"></i>
+    @Model.FirstCar.Brand @Model.FirstCar.CarModel vs @Model.SecondCar.Brand @Model.SecondCar.CarModel
+</h1>
+<br />
+<div class="container  text-center">
+    <div class="row">
+        <div class="col">
+            <div style="width: 20rem;">
+                <img class="card-img-top" src="@Model.FirstCar.SmallImageUrl" alt="Card image cap">
+            </div>
+        </div>
+        <div class="col">
+            <div style="width: 20rem; margin-left: 250px;">
+                <img class="card-img-top" src="@Model.SecondCar.SmallImageUrl" alt="Card image cap">
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col text-left">
+            @Model.FirstCar.Brand
+        </div>
+        <div>Brand</div>
+        <div class="col text-right">
+            @Model.SecondCar.Brand
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col text-left">
+            @Model.FirstCar.CarModel
+        </div>
+        <div>Model</div>
+        <div class="col text-right">
+            @Model.SecondCar.CarModel
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col text-left">
+            @Model.FirstCar.Year
+        </div>
+        <div>Year</div>
+        <div class="col text-right">
+            @Model.SecondCar.Year
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col text-left">
+            @Model.FirstCar.Category
+        </div>
+        <div>Category</div>
+        <div class="col text-right">
+            @Model.SecondCar.Category
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col text-left">
+            @Model.FirstCar.Fuel
+        </div>
+        <div>Fuel</div> 
+        <div class="col text-right">
+            @Model.SecondCar.Fuel
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col text-left">
+            @Model.FirstCar.Transmission
+        </div>
+        <div>Transmission</div>
+        <div class="col text-right">
+            @Model.SecondCar.Transmission
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col text-left">
+            @Model.FirstCar.Price
+        </div>
+        <div>Price</div>
+        <div class="col text-right">
+            @Model.SecondCar.Price
+        </div>
+    </div>
+    <hr />
+</div>
+

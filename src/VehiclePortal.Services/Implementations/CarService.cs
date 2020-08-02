@@ -91,7 +91,7 @@ namespace VehiclePortal.Services.Implementations
 
             var user = await this.context.Users.FirstOrDefaultAsync(u => u.UserName == username);
 
-            if (car == null)
+            if (car == null || user == null || model.Rating != 1)
             {
                 return false;
             }
